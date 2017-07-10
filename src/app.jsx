@@ -13,12 +13,12 @@ injectTapEventPlugin()
 const App = () => (
   <MuiThemeProvider>
     <div>
+      <WX />
+      <Upload />
       <Map
         longitude="121.6009"
         latitude="31.1811"
       />
-      <Upload />
-      <WX />
     </div>
   </MuiThemeProvider>
 )
