@@ -1,59 +1,39 @@
+/**
+ * @description webpack 开发环境配置
+ *
+ **/
 const path = require('path')
+const webpack = require('webpack')
 
-const ROOT_PATH = path.resolve(__dirname)
-const BUILD_PATH = path.resolve(ROOT_PATH, 'public')
-const APP_PATH = path.resolve(ROOT_PATH, 'src')
 module.exports = {
-  entry: {
-    app: path.resolve(APP_PATH, 'app.jsx')
-  },
   output: {
-    path: path.resolve(ROOT_PATH, BUILD_PATH),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
+  cache: true,
+  target: 'electron',
+  watchOptions: {
+    poll: true
+  },
+  devtool: 'eval-source-map',
+  entry: './src/app.jsx',
+  stats: { colors: true, minimal: true },
+  resolve: { extensions: ['.js', '.jsx', '.css', '.json'] },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        include: [
-          path.resolve(ROOT_PATH, 'src')
-        ],
-        loader: 'babel-loader'
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'react-hot-loader!babel-loader'
       },
       {
-        test: /\.(css|scss)$/,
-        include: [
-          path.resolve(ROOT_PATH, 'src')
-        ],
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            }
-          }
-        ]
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
-
-
     ]
-  },
-  resolve: {
-    modules: ['node_modules', path.join(ROOT_PATH, 'src')],
-    extensions: ['.js', '.jsx']
-  },
-  devtool: 'eval-source-map',
-  devServer: {
-    contentBase: path.join(ROOT_PATH, 'dist'),
-    compress: true,
-    port: 9000,
-    hot: true,
-    inline: true
   }
 }

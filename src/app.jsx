@@ -1,24 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Debug from 'debug'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
-import WX from './WX'
-import Upload from './upload'
-import Map from './map'
+import PDF from './PDF'
+
+/* modify debug filter before application starts' */
+const debug = Debug('app')
+localStorage.debug = '*'
 
 // required by Material UI
 injectTapEventPlugin()
 
 const App = () => (
   <MuiThemeProvider>
-    <div>
-      <WX />
-      <Upload />
-      <Map
-        longitude="121.6009"
-        latitude="31.1811"
-      />
+    <div style={{ position: 'fixed', width: '100%', height: '100%' }}>
+      <PDF filePath="./a.pdf" />
     </div>
   </MuiThemeProvider>
 )
