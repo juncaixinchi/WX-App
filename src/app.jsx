@@ -16,7 +16,7 @@ injectTapEventPlugin()
 const App = () => (
   <MuiThemeProvider>
     <div style={{ position: 'fixed', width: '100%', height: '100%' }}>
-      <PDF filePath="./a.pdf" />
+      <PDF filePath="a.pdf" />
     </div>
   </MuiThemeProvider>
 )
