@@ -1,7 +1,7 @@
 /**
  * @description webpack 开发环境配置
  *
- **/
+ */
 const path = require('path')
 const webpack = require('webpack')
 
@@ -11,7 +11,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   cache: true,
-  target: 'electron',
+  target: 'electron-renderer',
   watchOptions: {
     poll: true
   },
@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.json$/,
