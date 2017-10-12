@@ -2,6 +2,7 @@
  * @description webpack 开发环境配置
  *
  */
+
 const path = require('path')
 const webpack = require('webpack')
 
@@ -10,13 +11,12 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
-  cache: true,
   target: 'electron-renderer',
-  watchOptions: {
-    poll: true
-  },
   devtool: 'eval-source-map',
-  entry: './src/app.jsx',
+  entry: [
+    'webpack/hot/poll?1000',
+    './src/app.jsx'
+  ],
   stats: { colors: true, minimal: true },
   resolve: { extensions: ['.js', '.jsx', '.css', '.json'] },
   module: {
@@ -24,7 +24,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'react-hot-loader!babel-loader'
+        use: ['react-hot-loader/webpack', 'babel-loader']
       },
       {
         test: /\.css$/,
@@ -35,5 +35,9 @@ module.exports = {
         loader: 'json-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({ 'global.GENTLY': false })
+  ]
 }
