@@ -1,12 +1,8 @@
-/**
- * @description webpack 开发环境配置
- *
- */
-
 const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
+  mode: 'development',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
@@ -17,28 +13,18 @@ module.exports = {
     'webpack/hot/poll?1000',
     './src/app.jsx'
   ],
-  stats: { colors: true, minimal: true },
-  resolve: { extensions: ['.js', '.jsx', '.css', '.json'] },
+  resolve: { extensions: ['.js', '.jsx'] },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['react-hot-loader/webpack', 'babel-loader']
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
+        use: ['babel-loader']
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.DefinePlugin({ 'global.GENTLY': false })
   ]
 }

@@ -1,18 +1,9 @@
-### install packages
+git clone https://github.com/juncaixinchi/WX-App.git
 
-```
-npm i
-```
+cd WX-App
 
-### run app
+npm install
 
-```
-./start.sh
-```
-
-### dev
-
-```
 npm run webpack
-npm start
-```
+
+npm start // another terminal
